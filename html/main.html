@@ -1,0 +1,79 @@
+<!-- Begin HTML file main.html -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<!-- head contains page metadata, script links, stylesheets, etc (really stuff you don't see) -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- link to HTMX, our framework for live-updating shit -->
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+        <title>Public LED Website on an Arduino</title>
+        <!-- Main CSS (it is in-file because i dont wanna have seperate files and code that to nodemcu.) -->
+        <style>
+            body {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .ledstatus div {
+                display: inline-block;
+                padding: 1vw;
+                font-weight: bold;
+                border-radius: 25px;
+                width: 10vw;
+                text-align: center;
+            }
+
+            /* LED Status live updating styles */
+            .ledstatus {
+                display: inline-block;
+                margin: 5%;
+                cursor: pointer;
+            }
+            .ledstatus h1 {
+                margin: 0;
+                font-size: 18pt;
+            }
+
+            /* LED statuses */
+            .ledstatus .load {
+                background-color: rgb(255, 255, 0);
+            }
+            .ledstatus .on {
+                background-color: rgb(34, 222, 34);
+            }
+            .ledstatus .off {
+                background-color: rgb(226, 9, 9);
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>Public LED website on an Arduino</h1>
+        <p>This is a demonstration of using a NodeMCU microcontroller to function as a public
+	   internet-facing website.  
+	   <a href="https://alphagame.dev/projects/publicledwebsite">Learn more!</a></p>
+        <div id="led-status">
+            <!-- LED #1 -->
+            <div class="ledstatus" id="led1"  hx-trigger="every 1s" hx-get="/led/1">
+                <h1>LED #1</h1>
+                <div class="load">LOAD</div>
+            </div>
+
+            <!-- LED #2 -->
+            <div class="ledstatus" id="led2" hx-trigger="every 1s" hx-get="/led/2">
+                <h1>LED #2</h1>
+                <div class="load">LOAD</div>
+            </div>
+
+            <!-- LED #3 -->
+            <div class="ledstatus" id="led3" hx-trigger="every 1s" hx-get="/led/3">
+                <h1>LED #3</h1>
+                <div class="load">LOAD</div>
+            </div>
+        </div>
+    </body>
+</html>
+<!-- END html file main.html -->
